@@ -455,7 +455,8 @@ class LedgerEntryChange {
   LedgerEntryChange(this.type, this.key, {this.before, this.after});
 
   factory LedgerEntryChange.fromJson(Map<String, dynamic> json) {
-    XdrLedgerKey key = XdrLedgerKey.fromBase64EncodedXdrString(json['key']);
+    XdrLedgerKey key =
+        XdrLedgerKey.fromBase64EncodedXdrString(json['key'] ?? json['Key']);
     XdrLedgerEntry? before;
     if (json['before'] != null) {
       before = XdrLedgerEntry.fromBase64EncodedXdrString(json['before']);
@@ -465,7 +466,8 @@ class LedgerEntryChange {
       after = XdrLedgerEntry.fromBase64EncodedXdrString(json['after']);
     }
 
-    return LedgerEntryChange(json['type'], key, before: before, after: after);
+    return LedgerEntryChange(json['type'] ?? json['Type'], key,
+        before: before, after: after);
   }
 }
 
